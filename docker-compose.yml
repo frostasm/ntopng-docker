@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  redis:
+    image: "redis:alpine"
+  nprobe:
+    image: "frostasm/ntopng-docker:latest"
+    command: ['nprobe', '--interface', 'none', '--collector', 'none', '--collector-port', '2055', '--zmq', 'tcp://*:1234']
+    ports:
+     - "2055:2055/udp"
+  ntopng:
+    image: "frostasm/ntopng-docker:latest"
+    command: ["ntopng", "--redis", "redis", "--interface", "tcp://nprobe:1234", "--local-networks", "192.168.0.0/24"]
+    ports:
+     - "3000:3000"
+    depends_on:
+     - nprobe
+     - redis

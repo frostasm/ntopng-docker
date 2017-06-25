@@ -1,0 +1,5 @@
+version: '3'
+
+services:
+  ntopng:
+    command: ["ntopng", "--redis", "redis", "--interface", "tcp://nprobe:1234", "--local-networks", "192.168.88.0/24", "--disable-login", "1"]

@@ -10,7 +10,7 @@ services:
      - "2055:2055/udp"
   ntopng:
     image: "frostasm/ntopng-docker:latest"
-    command: ["ntopng", "--redis", "redis", "--interface", "tcp://nprobe:1234", "--local-networks", "192.168.0.0/24"]
+    command: ["ntopng", "--redis", "redis", "--interface", "tcp://nprobe:1234", "--local-networks", "192.168.88.0/24"]
     ports:
      - "3000:3000"
     depends_on:
